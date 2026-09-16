@@ -1,0 +1,5 @@
+<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">Alles unter einem Dach</title>
+  <polyline points="6,76 42,20 78,76" fill="none" stroke="#262b31" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="48,76 82,32 114,76" fill="none" stroke="#2f6feb" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

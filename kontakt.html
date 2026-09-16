@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt | Alles unter einem Dach</title>
+<meta name="description" content="Kontaktieren Sie Signer Dach AG oder TS Dach und Finanzen AG in Hombrechtikon — Dach- und Finanzdienstleistungen aus einer Hand.">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.svg" alt="Alles unter einem Dach Logo">
+      <span>Alles unter einem Dach
+        <small>Signer Dach AG &amp; TS Dach und Finanzen AG</small>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="leistungen.html">Leistungen</a>
+      <a href="ueber-uns.html">Über uns</a>
+      <a href="kontakt.html" class="active">Kontakt</a>
+    </nav>
+    <div class="header-actions">
+      <a href="tel:+41552446137" class="btn btn-ghost btn-sm">☎ 055 244 61 37</a>
+      <a href="kontakt.html" class="btn btn-primary btn-sm">Offerte anfragen</a>
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding:70px 0 60px;">
+  <div class="container">
+    <div class="hero-tag"><span class="dot-blue">●</span> Signer Dach AG <span class="dot-gold">●</span> TS Dach und Finanzen AG</div>
+    <h1 style="font-size:clamp(1.8rem,4vw,2.6rem);">Kontakt</h1>
+    <p class="lead">Beide Firmen sind eigenständig erreichbar. Nicht sicher, wer für Ihr Anliegen zuständig ist? Nutzen Sie einfach unser Formular — wir leiten Sie an das richtige Team weiter.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span class="badge" style="display:inline-block; background:var(--blue-tint); color:var(--blue-dark); font-size:0.72rem; font-weight:700; text-transform:uppercase; padding:5px 11px; border-radius:999px; margin-bottom:10px;">Gebäudehülle seit 1992</span>
+        <h3>Signer Dach AG</h3>
+        <dl>
+          <dt>Adresse</dt><dd>Gewerbestrasse 1, 8634 Hombrechtikon</dd>
+          <dt>Telefon</dt><dd><a href="tel:+41552446137">055 244 61 37</a></dd>
+          <dt>E-Mail</dt><dd><a href="mailto:info@signerdach.ch">info@signerdach.ch</a></dd>
+        </dl>
+      </div>
+      <div class="contact-card gold">
+        <span class="badge" style="display:inline-block; background:var(--gold-tint); color:var(--gold-dark); font-size:0.72rem; font-weight:700; text-transform:uppercase; padding:5px 11px; border-radius:999px; margin-bottom:10px;">Dach &amp; Finanzen</span>
+        <h3>TS Dach und Finanzen AG</h3>
+        <dl>
+          <dt>Adresse</dt><dd>Lützelstrasse 2, 8634 Hombrechtikon</dd>
+          <dt>Telefon</dt><dd><a href="tel:+41798082402">+41 79 808 24 02</a></dd>
+          <dt>E-Mail</dt><dd><a href="mailto:info@tsdachundfinanzenag.ch">info@tsdachundfinanzenag.ch</a></dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="story">
+      <div class="form-wrap">
+        <h3 style="margin-bottom:6px;">Nachricht senden</h3>
+        <p style="color:var(--muted); font-size:0.92rem;">Ihr Mailprogramm öffnet sich mit einer vorausgefüllten Nachricht an das gewählte Team.</p>
+        <form id="contact-form" method="post" enctype="text/plain">
+          <div class="form-grid">
+            <div class="field">
+              <label for="firstname">Vorname *</label>
+              <input type="text" id="firstname" name="Vorname" required>
+            </div>
+            <div class="field">
+              <label for="lastname">Nachname *</label>
+              <input type="text" id="lastname" name="Nachname" required>
+            </div>
+            <div class="field">
+              <label for="email">E-Mail *</label>
+              <input type="email" id="email" name="E-Mail" required>
+            </div>
+            <div class="field">
+              <label for="phone">Telefon</label>
+              <input type="tel" id="phone" name="Telefon">
+            </div>
+            <div class="field full">
+              <label for="topic">Ihr Anliegen betrifft *</label>
+              <select id="topic" name="Anliegen" required>
+                <option value="signerdach">Dach — Signer Dach AG</option>
+                <option value="tsdach">Dach &amp; Finanzen — TS Dach und Finanzen AG</option>
+                <option value="both" selected>Ich bin nicht sicher / beides</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="message">Nachricht *</label>
+              <textarea id="message" name="Nachricht" rows="5" required></textarea>
+            </div>
+            <div class="field checkbox full">
+              <input type="checkbox" id="privacy" required>
+              <label for="privacy">Ich habe die <a href="datenschutz.html" style="text-decoration:underline;">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zu. *</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top:22px;">Nachricht senden</button>
+          <p class="form-note">* Pflichtfelder. Diese Website versendet Nachrichten direkt über Ihr E-Mail-Programm — es werden keine Formulardaten auf einem Server gespeichert.</p>
+          <div class="form-success" id="form-success">Ihr Mailprogramm sollte sich nun mit der vorausgefüllten Nachricht geöffnet haben. Falls nicht, schreiben Sie uns direkt an die oben genannten Adressen.</div>
+        </form>
+      </div>
+      <div>
+        <div class="form-wrap" style="height:100%;">
+          <h3 style="margin-bottom:6px;">So finden Sie uns</h3>
+          <p style="color:var(--muted); font-size:0.92rem;">Beide Standorte liegen in Hombrechtikon ZH, nur wenige Gehminuten voneinander entfernt.</p>
+
+          <div class="contact-card" style="margin-top:22px; padding:22px;">
+            <span class="badge" style="display:inline-block; background:var(--blue-tint); color:var(--blue-dark); font-size:0.72rem; font-weight:700; text-transform:uppercase; padding:5px 11px; border-radius:999px; margin-bottom:8px;">Signer Dach AG</span>
+            <p style="margin:0 0 14px; font-weight:600;">Gewerbestrasse 1, 8634 Hombrechtikon</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Gewerbestrasse%201%2C%208634%20Hombrechtikon" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm">Route planen ↗</a>
+          </div>
+
+          <div class="contact-card gold" style="margin-top:18px; padding:22px;">
+            <span class="badge" style="display:inline-block; background:var(--gold-tint); color:var(--gold-dark); font-size:0.72rem; font-weight:700; text-transform:uppercase; padding:5px 11px; border-radius:999px; margin-bottom:8px;">TS Dach und Finanzen AG</span>
+            <p style="margin:0 0 14px; font-weight:600;">Lützelstrasse 2, 8634 Hombrechtikon</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=L%C3%BCtzelstrasse%202%2C%208634%20Hombrechtikon" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm">Route planen ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><img src="assets/logo.svg" alt=""> Alles unter einem Dach</div>
+        <p>Signer Dach AG und TS Dach und Finanzen AG unter gemeinsamer Leitung – Gebäudehülle, Dachbau und Finanzdienstleistungen in Hombrechtikon ZH.</p>
+      </div>
+      <div class="footer-col">
+        <span class="tag blue">Signer Dach AG</span>
+        <ul>
+          <li>Gewerbestrasse 1, 8634 Hombrechtikon</li>
+          <li><a href="tel:+41552446137">055 244 61 37</a></li>
+          <li><a href="mailto:info@signerdach.ch">info@signerdach.ch</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <span class="tag gold">TS Dach und Finanzen AG</span>
+        <ul>
+          <li>Lützelstrasse 2, 8634 Hombrechtikon</li>
+          <li><a href="tel:+41798082402">+41 79 808 24 02</a></li>
+          <li><a href="mailto:info@tsdachundfinanzenag.ch">info@tsdachundfinanzenag.ch</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> Alles unter einem Dach — Signer Dach AG &amp; TS Dach und Finanzen AG</span>
+      <ul>
+        <li><a href="leistungen.html">Leistungen</a></li>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="datenschutz.html">Datenschutz</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
