@@ -1,12 +1,14 @@
 <?php
 // Contact form handler for allesuntereinemdach.ch (Hostpoint, PHP mail()).
 // Recipients are fixed here on the server; the visitor can only choose a key.
+// For now every topic goes to TS Dach und Finanzen AG; the chosen topic is in the email.
 
 const RECIPIENTS = [
-    'signerdach' => ['info@signerdach.ch'],
+    'signerdach' => ['info@tsdachundfinanzenag.ch'],
     'tsdach'     => ['info@tsdachundfinanzenag.ch'],
-    'both'       => ['info@signerdach.ch', 'info@tsdachundfinanzenag.ch'],
+    'both'       => ['info@tsdachundfinanzenag.ch'],
 ];
+const MAX_MESSAGES_PER_HOUR = 5;
 const TOPIC_LABELS = [
     'signerdach' => 'Dach – Signer Dach AG',
     'tsdach'     => 'Dach & Finanzen – TS Dach und Finanzen AG',
@@ -45,6 +47,28 @@ function encodeHeader(string $value): string
     return '=?UTF-8?B?' . base64_encode($value) . '?=';
 }
 
+// Simple flood protection: at most MAX_MESSAGES_PER_HOUR per IP (stored as a hash).
+// If the temp directory is not writable, the form still works.
+function rateLimited(): bool
+{
+    $file = sys_get_temp_dir() . '/aued_form_' . hash('sha256', $_SERVER['REMOTE_ADDR'] ?? 'unknown');
+    $now = time();
+    $times = [];
+    if (is_readable($file)) {
+        foreach (explode(',', (string) @file_get_contents($file)) as $t) {
+            if ((int) $t > $now - 3600) {
+                $times[] = (int) $t;
+            }
+        }
+    }
+    if (count($times) >= MAX_MESSAGES_PER_HOUR) {
+        return true;
+    }
+    $times[] = $now;
+    @file_put_contents($file, implode(',', $times), LOCK_EX);
+    return false;
+}
+
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     header('Location: kontakt.html', true, 303);
     exit;
@@ -66,6 +90,10 @@ $privacy   = isset($_POST['privacy']);
 if ($firstname === '' || $lastname === '' || $message === '' || !$privacy
     || !filter_var($email, FILTER_VALIDATE_EMAIL) || !isset(RECIPIENTS[$topic])) {
     respond(false, 'Bitte füllen Sie alle Pflichtfelder korrekt aus.', 422, $wantsJson);
+}
+
+if (rateLimited()) {
+    respond(false, 'Sie haben bereits mehrere Nachrichten gesendet. Bitte versuchen Sie es später erneut oder rufen Sie uns an.', 429, $wantsJson);
 }
 
 $subject = 'Kontaktanfrage Website: ' . $firstname . ' ' . $lastname;
