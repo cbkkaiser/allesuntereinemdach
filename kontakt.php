@@ -125,4 +125,41 @@ if (!$sent) {
     respond(false, 'Die Nachricht konnte leider nicht gesendet werden. Bitte schreiben Sie uns direkt per E-Mail oder rufen Sie uns an.', 500, $wantsJson);
 }
 
-respond(true, 'Vielen Dank! Ihre Nachricht wurde gesendet. Wir melden uns so bald wie möglich bei Ihnen.', 200, $wantsJson);
+// Confirmation to the visitor. It deliberately contains no text the visitor typed,
+// so the form cannot be misused to send someone else arbitrary content.
+$confirmationBody = "Guten Tag\n\n"
+    . "Vielen Dank für Ihre Nachricht über das Kontaktformular auf allesuntereinemdach.ch. "
+    . "Wir haben sie erhalten und melden uns so bald wie möglich bei Ihnen.\n\n"
+    . "Bei dringenden Anliegen erreichen Sie uns telefonisch:\n"
+    . "Signer Dach AG: 055 244 61 37\n"
+    . "TS Dach und Finanzen AG: +41 79 808 24 02\n\n"
+    . "Freundliche Grüsse\n"
+    . "Alles unter einem Dach\n"
+    . "Signer Dach AG & TS Dach und Finanzen AG\n\n"
+    . "--\nDiese E-Mail wurde automatisch versendet. Falls Sie uns nicht geschrieben haben, können Sie sie ignorieren.\n";
+
+$confirmationHeaders = [
+    'From: ' . encodeHeader(SENDER_NAME) . ' <' . SENDER_ADDRESS . '>',
+    'Reply-To: ' . RECIPIENTS[$topic][0],
+    'Auto-Submitted: auto-replied',
+    'MIME-Version: 1.0',
+    'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: 8bit',
+];
+
+$confirmed = mail(
+    $email,
+    encodeHeader('Ihre Anfrage an Alles unter einem Dach'),
+    $confirmationBody,
+    implode("\r\n", $confirmationHeaders),
+    '-f' . SENDER_ADDRESS
+);
+
+respond(
+    true,
+    $confirmed
+        ? 'Vielen Dank! Ihre Nachricht wurde gesendet. Sie erhalten in Kürze eine Bestätigung per E-Mail.'
+        : 'Vielen Dank! Ihre Nachricht wurde gesendet. Wir melden uns so bald wie möglich bei Ihnen.',
+    200,
+    $wantsJson
+);

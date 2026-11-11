@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var notice = document.getElementById("form-success");
     var button = form.querySelector('button[type="submit"]');
     var messages = {
-      ok: "Vielen Dank! Ihre Nachricht wurde gesendet. Wir melden uns so bald wie möglich bei Ihnen.",
+      ok: "Vielen Dank! Ihre Nachricht wurde gesendet. Sie erhalten in Kürze eine Bestätigung per E-Mail.",
       error: "Die Nachricht konnte leider nicht gesendet werden. Bitte schreiben Sie uns direkt per E-Mail oder rufen Sie uns an."
     };
 
