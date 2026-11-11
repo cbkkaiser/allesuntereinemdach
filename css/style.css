@@ -535,6 +535,7 @@ section { padding: 88px 0; }
   margin-top: 16px;
 }
 .form-success.show { display: block; }
+.form-success.error { background: #fdecea; color: #8a1c12; }
 
 /* ---------- CTA band ---------- */
 .cta-band {

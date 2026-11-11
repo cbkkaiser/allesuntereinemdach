@@ -19,29 +19,50 @@ document.addEventListener("DOMContentLoaded", function () {
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Contact form: route to the right company mailbox based on the topic chosen,
-  // and show a confirmation note (the mail client opens with the message pre-filled).
+  // Contact form: send to kontakt.php, which emails the chosen company.
+  // Without JavaScript the form posts normally and kontakt.php redirects back with ?status=.
   var form = document.getElementById("contact-form");
   if (form) {
-    var topicSelect = form.querySelector("#topic");
-    var mailTargets = {
-      signerdach: "info@signerdach.ch",
-      tsdach: "info@tsdachundfinanzenag.ch",
-      both: "info@signerdach.ch,info@tsdachundfinanzenag.ch"
+    var notice = document.getElementById("form-success");
+    var button = form.querySelector('button[type="submit"]');
+    var messages = {
+      ok: "Vielen Dank! Ihre Nachricht wurde gesendet. Wir melden uns so bald wie möglich bei Ihnen.",
+      error: "Die Nachricht konnte leider nicht gesendet werden. Bitte schreiben Sie uns direkt per E-Mail oder rufen Sie uns an."
     };
 
-    function updateAction() {
-      var target = mailTargets[topicSelect.value] || mailTargets.both;
-      form.action = "mailto:" + target;
-    }
-    if (topicSelect) {
-      topicSelect.addEventListener("change", updateAction);
-      updateAction();
+    function showNotice(ok, text) {
+      if (!notice) return;
+      notice.textContent = text || (ok ? messages.ok : messages.error);
+      notice.classList.toggle("error", !ok);
+      notice.classList.add("show");
     }
 
-    form.addEventListener("submit", function () {
-      var success = document.getElementById("form-success");
-      if (success) success.classList.add("show");
-    });
+    var status = new URLSearchParams(window.location.search).get("status");
+    if (status === "ok" || status === "error") showNotice(status === "ok");
+
+    if (window.fetch && window.FormData) {
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (button) button.disabled = true;
+        if (notice) notice.classList.remove("show");
+
+        fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" }
+        })
+          .then(function (response) {
+            return response.json().catch(function () { return {}; }).then(function (data) {
+              return { ok: response.ok && data.ok, message: data.message };
+            });
+          })
+          .then(function (result) {
+            showNotice(result.ok, result.message);
+            if (result.ok) form.reset();
+          })
+          .catch(function () { showNotice(false); })
+          .then(function () { if (button) button.disabled = false; });
+      });
+    }
   }
 });

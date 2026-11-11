@@ -69,28 +69,32 @@
     <div class="story">
       <div class="form-wrap">
         <h3 style="margin-bottom:6px;">Nachricht senden</h3>
-        <p style="color:var(--muted); font-size:0.92rem;">Ihr Mailprogramm öffnet sich mit einer vorausgefüllten Nachricht an das gewählte Team.</p>
-        <form id="contact-form" method="post" enctype="text/plain">
+        <p style="color:var(--muted); font-size:0.92rem;">Ihre Nachricht geht direkt an das gewählte Team.</p>
+        <form id="contact-form" action="kontakt.php" method="post">
           <div class="form-grid">
             <div class="field">
               <label for="firstname">Vorname *</label>
-              <input type="text" id="firstname" name="Vorname" required>
+              <input type="text" id="firstname" name="firstname" maxlength="100" required>
             </div>
             <div class="field">
               <label for="lastname">Nachname *</label>
-              <input type="text" id="lastname" name="Nachname" required>
+              <input type="text" id="lastname" name="lastname" maxlength="100" required>
             </div>
             <div class="field">
               <label for="email">E-Mail *</label>
-              <input type="email" id="email" name="E-Mail" required>
+              <input type="email" id="email" name="email" maxlength="200" required>
             </div>
             <div class="field">
               <label for="phone">Telefon</label>
-              <input type="tel" id="phone" name="Telefon">
+              <input type="tel" id="phone" name="phone" maxlength="50">
+            </div>
+            <div class="field full" style="position:absolute; left:-9999px;" aria-hidden="true">
+              <label for="website">Bitte leer lassen</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
             </div>
             <div class="field full">
               <label for="topic">Ihr Anliegen betrifft *</label>
-              <select id="topic" name="Anliegen" required>
+              <select id="topic" name="topic" required>
                 <option value="signerdach">Dach — Signer Dach AG</option>
                 <option value="tsdach">Dach &amp; Finanzen — TS Dach und Finanzen AG</option>
                 <option value="both" selected>Ich bin nicht sicher / beides</option>
@@ -98,16 +102,16 @@
             </div>
             <div class="field full">
               <label for="message">Nachricht *</label>
-              <textarea id="message" name="Nachricht" rows="5" required></textarea>
+              <textarea id="message" name="message" rows="5" maxlength="5000" required></textarea>
             </div>
             <div class="field checkbox full">
-              <input type="checkbox" id="privacy" required>
+              <input type="checkbox" id="privacy" name="privacy" value="1" required>
               <label for="privacy">Ich habe die <a href="datenschutz.html" style="text-decoration:underline;">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zu. *</label>
             </div>
           </div>
           <button type="submit" class="btn btn-primary" style="margin-top:22px;">Nachricht senden</button>
-          <p class="form-note">* Pflichtfelder. Diese Website versendet Nachrichten direkt über Ihr E-Mail-Programm — es werden keine Formulardaten auf einem Server gespeichert.</p>
-          <div class="form-success" id="form-success">Ihr Mailprogramm sollte sich nun mit der vorausgefüllten Nachricht geöffnet haben. Falls nicht, schreiben Sie uns direkt an die oben genannten Adressen.</div>
+          <p class="form-note">* Pflichtfelder. Ihre Angaben werden verschlüsselt übertragen, per E-Mail an das gewählte Team weitergeleitet und auf dem Webserver nicht gespeichert.</p>
+          <div class="form-success" id="form-success" role="status" aria-live="polite"></div>
         </form>
       </div>
       <div>
